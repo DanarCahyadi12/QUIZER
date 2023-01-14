@@ -9,7 +9,6 @@ let sess;
 const Auth = (req,res,next) => {
      sess = req.session
     if(sess.user){
-        console.log("USER ADAA SS")
         next()
     }else{
         massage.SetMassage('Acces denied. Please login to your account')
@@ -26,7 +25,10 @@ router.get('/login',(req,res) => {
 })
 
 router.get('/overview',(req,res) => {
-    res.render('quiz')
+    sess = req.session
+    res.render('quiz',{
+        sess
+    })
 })
 
 router.get('/register',(req,res) => {
@@ -51,6 +53,13 @@ router.get('/logout',(req,res) =>{
     req.session.destroy((err) => {
         if(err) throw  err
         res.redirect('/login')
+    })
+})
+
+router.get('/profile',Auth,(req,res) => {
+    sess = req.session
+    res.render('profile',{
+        sess
     })
 })
 

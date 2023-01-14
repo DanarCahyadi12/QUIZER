@@ -1,0 +1,36 @@
+<label for="my-modal-3" class=" absolute w-[20px]  z-10 left-[60px]  top-[300%]"><img src="/asset/pen-solid.svg" alt="" class=""></label>
+
+<!-- The button to open modal -->
+
+<!-- Put this part before </body> tag -->
+<input type="checkbox" id="my-modal-3" class="modal-toggle" />
+<div class="modal">
+  <div class="modal-box relative">
+    <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+    <form action="" method="POST">
+        <div class="container flex flex-col">
+            <div class="image">
+                <label class="label">
+                    <span class="label-text">Change profile image</span>
+                </label>
+                <input type="file" name="img" id="">
+
+            </div>
+            <div class="username">    
+                <label class="label">
+                    <span class="label-text">Username</span>
+                </label>
+                <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" name="username" />
+            </div>
+            <div class="description mt-[20px]">    
+                <label class="label">
+                    <span class="label-text">Description</span>
+                    <span class="label-text-alt word-count mr-[32%]">(0/255)</span>
+                </label>
+                <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" name="desc"/>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-outline mt-[20px]">change</button>
+    </form>
+  </div>
+</div>
