@@ -2,6 +2,21 @@ const db = require('../model/db')
 const bcrypt = require('bcrypt')
 const data = require('../class/data.class')
 const massage = require('../class/massage.class')
+const fse = require('fs-extra')
+const path = require('path')
+
+
+// const src = path.join(__dirname,'/public/asset/pen-solid.svg')
+// const dest = path.join(__dirname,'/public/image/')
+
+// // With a callback:
+// fse.move(src, dest, err => {
+//   if (err) return console.error(err)
+//   console.log('success!')
+// })
+
+
+
 class Login{
     LoginAccount = (req,res,next) => {
         const {email_username,password} = req.body
@@ -12,22 +27,23 @@ class Login{
         db.query(sql,[username_email,username_email],(err,rows,fields) => {
             if(err) throw err
             if(rows.length > 0){
-                this.#PasswordCompare(plainTextPassword,rows[0].password,rows[0].iduser,rows[0].email,rows[0].username,next)
+                const {iduser,username,password,email,point,ranks,total_quiz,description} = rows[0]
+                this.#PasswordCompare(plainTextPassword,password,iduser,email,username,point,ranks,total_quiz,description,res,next)
             }else{
                 massage.SetMassage('Invalid username or email or password ')
                 res.redirect('/login')
             }
         })
     }
-    #PasswordCompare(plainTextPass,hashedPassword,iduser,email,username,next){
+    #PasswordCompare(plainTextPass,hashedPassword,iduser,email,username,point,ranks,total_quiz,description,res,next){
         bcrypt.compare(plainTextPass,hashedPassword,(err,result) => {
             if(err) throw err
             if(result){
-                data.SetData(iduser,username,email)
+                data.SetData(iduser,username,email,point,total_quiz,ranks,description)
                 next()
             }else{
-                const {email_username,password} = req.body
-                this.#GetUserFromDatabase(email_username,password,res)
+                massage.SetMassage('Invalid username or email or password ')
+                res.redirect('/login')
             }
         })
     }

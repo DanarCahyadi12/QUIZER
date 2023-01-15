@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const index = require('../controller/index.controller')
 const massage = require('../class/massage.class')
 const login = require('../controller/login.controller')
 const register = require('../controller/register.controller')
@@ -9,7 +8,6 @@ let sess;
 const Auth = (req,res,next) => {
      sess = req.session
     if(sess.user){
-        console.log("USER ADAA SS")
         next()
     }else{
         massage.SetMassage('Acces denied. Please login to your account')
@@ -17,7 +15,9 @@ const Auth = (req,res,next) => {
     }
 }
 
-router.get('/',index.GetIndexPage) //index 
+router.get('/',(req,res) =>{
+    res.render('index')
+}) //index 
 
 router.get('/login',(req,res) => {
     res.render('login',{
@@ -26,7 +26,10 @@ router.get('/login',(req,res) => {
 })
 
 router.get('/overview',(req,res) => {
-    res.render('quiz')
+    sess = req.session
+    res.render('quiz',{
+        sess
+    })
 })
 
 router.get('/register',(req,res) => {
@@ -51,6 +54,13 @@ router.get('/logout',(req,res) =>{
     req.session.destroy((err) => {
         if(err) throw  err
         res.redirect('/login')
+    })
+})
+
+router.get('/profile',Auth,(req,res) => {
+    sess = req.session
+    res.render('profile',{
+        sess
     })
 })
 
