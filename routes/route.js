@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const index = require('../controller/index.controller')
 const massage = require('../class/massage.class')
 const login = require('../controller/login.controller')
 const register = require('../controller/register.controller')
@@ -16,7 +15,9 @@ const Auth = (req,res,next) => {
     }
 }
 
-router.get('/',index.GetIndexPage) //index 
+router.get('/',(req,res) =>{
+    res.render('index')
+}) //index 
 
 router.get('/login',(req,res) => {
     res.render('login',{

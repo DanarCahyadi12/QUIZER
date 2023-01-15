@@ -10,17 +10,36 @@ const data = require('../class/data.class')
 class Register {
 
     #InsertDataIntoDatabase(res,next,username,email,password){
-        let sql = "INSERT INTO user (username,email,password) VALUE (?,?,?)"
-        db.query(sql,[username,email,password],(err,rows,fields) => {
-            if(err){
-                massage.SetMassage('Username , email or password maybe already takens. Please try again')
-                res.redirect('/register')
-            } else{
-                data.SetData(rows.insertId,username,email)
-                next()
-            }
 
+        let sql = "INSERT INTO user (username,email,password,point,ranks,total_quiz) VALUE (?,?,?,?,?,?)"
+        let querySelectData = " SELECT username FROM user"
+        db.query(querySelectData,(err,rank) => {
+            if(err) throw err
+            if(rank.length === 0) {
+                db.query(sql,[username,email,password,'0',rank.length +1,'0'],(err,rows,fields) => {
+                    if(err){
+                        massage.SetMassage('Username , email or password maybe already takens. Please try again')
+                        res.redirect('/register')
+                    } else{
+                        data.SetData(rows.insertId,username,email,0,0,rank.length + 1,null)
+                        next()
+                    }
+                })
+            }else{
+                db.query(sql,[username,email,password,'0',rank.length ,'0'],(err,rows,fields) => {
+                    if(err){
+                        massage.SetMassage('Username , email or password maybe already takens. Please try again')
+                        res.redirect('/register')
+                    } else{
+                        data.SetData(rows.insertId,username,email,0,0,rank.length,null)
+                        next()
+                    }
+        
+                })
+            }
+           
         })
+       
     }
 
     #HashingPassword(res,next,username,email,password){
