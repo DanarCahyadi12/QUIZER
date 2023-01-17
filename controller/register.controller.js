@@ -4,13 +4,11 @@ const bcrypt = require('bcrypt')
 const BcryptSalt = require('bcrypt-salt');
 const bs = new BcryptSalt()
 const data = require('../class/data.class')
-
-
+const profile = require('./profile.controller')
 
 class Register {
 
     #InsertDataIntoDatabase(res,next,username,email,password){
-
         let sql = "INSERT INTO user (username,email,password,point,ranks,total_quiz) VALUE (?,?,?,?,?,?)"
         let querySelectData = " SELECT username FROM user"
         db.query(querySelectData,(err,rank) => {
@@ -22,6 +20,7 @@ class Register {
                         res.redirect('/register')
                     } else{
                         data.SetData(rows.insertId,username,email,0,0,rank.length + 1,null)
+                        data.SetProfileSession('/asset/user.png')
                         next()
                     }
                 })
@@ -32,9 +31,9 @@ class Register {
                         res.redirect('/register')
                     } else{
                         data.SetData(rows.insertId,username,email,0,0,rank.length,null)
+                        data.SetProfileSession('/asset/user.png')
                         next()
                     }
-        
                 })
             }
            

@@ -1,6 +1,5 @@
 
 const db = require('../model/db')
-const session = require('../class/session.class')
 const fs = require('fs')
 class Data {
     #id
@@ -10,7 +9,7 @@ class Data {
     #point
     #uploadedQuiz
     #description
-
+    #profileImg
     #sess
     SetData(id,username,email,point,uploadedQuiz,rank,desc){
         this.#id = id
@@ -20,9 +19,16 @@ class Data {
         this.#uploadedQuiz = uploadedQuiz
         this.#rank = rank
         this.#description = desc
+
+        
     }
 
-
+    SetProfileSession(path){
+        this.#profileImg = path
+        console.log({
+            pathNow :this.#profileImg
+        })
+    }
     GetUpdateData(){
         const { id } = session.GetSession().user
         let sql = "SELECT iduser,username,email,point,ranks,total_quiz,description FROM user WHERE iduser = ?"
@@ -46,6 +52,7 @@ class Data {
             uploadedquiz : this.#uploadedQuiz,
             rank : this.#rank,
             description : this.#description,
+            profilePath : this.#profileImg
         }
     }
 

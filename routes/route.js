@@ -4,6 +4,8 @@ const massage = require('../class/massage.class')
 const login = require('../controller/login.controller')
 const register = require('../controller/register.controller')
 const data= require('../class/data.class')
+const profile = require('../controller/profile.controller')
+
 let sess;
 const Auth = (req,res,next) => {
      sess = req.session
@@ -17,7 +19,7 @@ const Auth = (req,res,next) => {
 
 router.get('/',(req,res) =>{
     res.render('index')
-}) //index 
+}) 
 
 router.get('/login',(req,res) => {
     res.render('login',{
@@ -59,10 +61,13 @@ router.get('/logout',(req,res) =>{
 
 router.get('/profile',Auth,(req,res) => {
     sess = req.session
+    sess.user = data.GetData()
     res.render('profile',{
         sess
     })
 })
+router.post('/profile',profile.GetProfileImage)
+
 
 
 

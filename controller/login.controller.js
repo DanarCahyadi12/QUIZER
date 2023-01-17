@@ -3,21 +3,12 @@ const bcrypt = require('bcrypt')
 const data = require('../class/data.class')
 const massage = require('../class/massage.class')
 const fse = require('fs-extra')
+const fs = require('fs')
 const path = require('path')
-
-
-// const src = path.join(__dirname,'/public/asset/pen-solid.svg')
-// const dest = path.join(__dirname,'/public/image/')
-
-// // With a callback:
-// fse.move(src, dest, err => {
-//   if (err) return console.error(err)
-//   console.log('success!')
-// })
-
-
+const profile = require('./profile.controller')
 
 class Login{
+    #ext = ['.jpg','.png','jpeg']
     LoginAccount = (req,res,next) => {
         const {email_username,password} = req.body
         this.#GetUserFromDatabase(email_username,password,res,next)
@@ -40,6 +31,7 @@ class Login{
             if(err) throw err
             if(result){
                 data.SetData(iduser,username,email,point,total_quiz,ranks,description)
+                profile.SetProfile()
                 next()
             }else{
                 massage.SetMassage('Invalid username or email or password ')

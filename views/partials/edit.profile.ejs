@@ -7,14 +7,21 @@
 <div class="modal">
   <div class="modal-box relative">
     <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         <div class="container flex flex-col">
-            <div class="image">
-                <label class="label">
-                    <span class="label-text">Change profile image</span>
-                </label>
-                <input type="file" name="img" id="">
-
+            <div class="profile-action">
+                <div class="change-profile ">
+                    <label class="label">
+                        <span class="label-text">Change profile image</span>
+                    </label>
+                    <input type="file" name="img" id="">
+                </div>
+                <div class="del-profile">
+                    <label class="label">
+                        <span class="label-text">Delete profile</span>
+                    </label>
+                    <button class="btn">DELETE</button>
+                </div>
             </div>
             <div class="username">    
                 <label class="label">
