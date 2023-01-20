@@ -13,32 +13,17 @@ class Register {
         let querySelectData = " SELECT username FROM user"
         db.query(querySelectData,(err,rank) => {
             if(err) throw err
-            if(rank.length === 0) {
-                db.query(sql,[username,email,password,'0',rank.length +1,'0'],(err,rows,fields) => {
-                    if(err){
-                        massage.SetMassage('Username , email or password maybe already takens. Please try again')
-                        res.redirect('/register')
-                    } else{
-                        data.SetData(rows.insertId,username,email,0,0,rank.length + 1,null)
-                        data.SetProfileSession('/asset/user.png')
-                        next()
-                    }
-                })
-            }else{
-                db.query(sql,[username,email,password,'0',rank.length ,'0'],(err,rows,fields) => {
-                    if(err){
-                        massage.SetMassage('Username , email or password maybe already takens. Please try again')
-                        res.redirect('/register')
-                    } else{
-                        data.SetData(rows.insertId,username,email,0,0,rank.length,null)
-                        data.SetProfileSession('/asset/user.png')
-                        next()
-                    }
-                })
-            }
-           
+            db.query(sql,[username,email,password,'0',rank.length +1,'0'],(err,rows,fields) => {
+                if(err){
+                    massage.SetMassage('Username , email or password maybe already takens. Please try again')
+                    res.redirect('/register')
+                } else{
+                    data.SetData(rows.insertId,username,email,0,0,rank.length + 1,null)
+                    data.SetProfileSession('/asset/user.png')
+                    next()
+                }
+            })
         })
-       
     }
 
     #HashingPassword(res,next,username,email,password){

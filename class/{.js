@@ -53,6 +53,13 @@ class Data {
         }
     }
 
+    SetDataRank(){
+        let sql = "SELECT iduser,username,email,point,ranks,total_quiz,description FROM user ORDER BY points"
+        db.query(sql,(err,rows) =>{
+           if(err) throw err
+            console.log(rows)
+        })
+    }
 
 }
 

@@ -1,8 +1,7 @@
 const fs = require('fs')
 const fse = require('fs-extra')
-const { basename } = require('path')
+const db = require('../model/db')
 const path = require('path')
-const { off } = require('process')
 const data = require('../class/data.class')
 const massage = require('../class/massage.class')
 
@@ -13,9 +12,6 @@ class Profile {
         const id = user.id
         const ext = ['.jpg','.jpeg','.png']
         for (let index = 0; index < ext.length; index++) {
-            console.log({
-                CheckProfile : index
-            })
             if(fs.existsSync( `${this.#dir}${id}${ext[index]}`)){
                 try{
                     data.SetProfileSession( `/img/${id}${ext[index]}`)
@@ -34,10 +30,7 @@ class Profile {
         }
     }
 
-
-
-    GetProfileImage (req,res){
-        const file = req.files.img
+    SetProfileImage(res,next,file){
         const user = data.GetData()
         const id = user.id
         let dir = "public/img/"+ file.name
@@ -48,30 +41,66 @@ class Profile {
                     try{
                         fs.unlink( `public/img/${id}${ext[index]}`,err => {
                             if(err) throw err
-                            console.log({
-                                isSucces : "Delete previous profile succes"
-                            })
                         })
                     }catch(err) {
                         throw err
                     }
                     break
                 }
-
             }
             file.mv(dir,err => {
                 if(err) throw err
                 fs.rename(dir, `public/img/${id}${path.extname(file.name)}`,err => {
                     if(err) throw err
                     data.SetProfileSession( `/img/${id}${path.extname(file.name)}`)
-                    console.log(data.GetData())
-                    res.redirect('/profile')
+                    next()
                 })
             }) 
         }else{
             massage.SetMassage('Extension must be jpg,png or jpeg')
-            res.redirect('/profile')
+            next()
         }
     }
+
+    SetProfileUser  = (req,res,next) => {
+        if(req.files?.img){
+            const file = req.files.img
+            this.SetProfileImage(res,next,file) 
+        }
+        this.UpdateUsernameAndDescription(req,res,next)
+    }
+    
+    DeleteProfile(req,res){
+        const ext = ['.jpg','.jpeg','.png']
+        let path = req.params.path.slice(1)
+        fs.unlink(`public/img/${path}.png`,err  => {
+            if(err) throw err
+        }) 
+        data.SetProfileSession('/asset/user.png')
+        res.json({
+            massage : "Profile succesfully deleted",
+            redirect :'/profile'
+        })        
+    }
+
+    UpdateUsernameAndDescription(req,res,next){
+        const user = data.GetData()
+        const id = user.id
+        const {username,description} = req.body
+        let sql = "UPDATE user SET username = ? ,description = ? WHERE iduser = ?"
+        db.query(sql,[username,description,id],(err,rows,result) => {
+            if(err) throw err
+            massage.SetMassage("Profile has been changed")
+            console.log({
+                massage : 'Update profile succesfully'
+            })
+            data.GetUpdateData()
+            next()
+
+
+
+        })
+    }   
+
 }
 module.exports = new Profile()

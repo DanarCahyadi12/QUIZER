@@ -16,25 +16,34 @@
                     </label>
                     <input type="file" name="img" id="">
                 </div>
-                <div class="del-profile">
-                    <label class="label">
-                        <span class="label-text">Delete profile</span>
-                    </label>
-                    <button class="btn">DELETE</button>
-                </div>
+                <% if (sess.user.profilePath !== '/asset/user.png') { %>
+                    <div class="del-profile block">
+                        <label class="label">
+                            <span class="label-text">Delete profile</span>
+                        </label> 
+                        <label class="btn del-profile" data-id="<%= sess.user.id %>">DELETE</label>
+                    </div>
+                <% }else { %>
+                    <div class="del-profile hidden">
+                        <label class="label">
+                            <span class="label-text">Delete profile</span>
+                        </label> 
+                        <label class="btn del-profile" data-id="<%= sess.user.id %>">DELETE</label>
+                    </div>
+                <% } %>
             </div>
             <div class="username">    
                 <label class="label">
                     <span class="label-text">Username</span>
                 </label>
-                <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" name="username" />
+                <input type="text" placeholder="Type here" class="username input input-bordered w-full max-w-xs" name="username" value=" <%= sess.user.username %> " />
             </div>
             <div class="description mt-[20px]">    
                 <label class="label">
                     <span class="label-text">Description</span>
-                    <span class="label-text-alt word-count mr-[32%]">(0/255)</span>
+                    <span class="label-text-alt word-count mr-[32%]">(<span class="count">0</span>/255)</span>
                 </label>
-                <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" name="desc"/>
+                <input type="text" placeholder="Type here" class="description input input-bordered w-full max-w-xs" name="description" value="<%= sess.user.description%>"/>
             </div>
         </div>
         <button type="submit" class="btn btn-outline mt-[20px]">change</button>

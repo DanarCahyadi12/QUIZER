@@ -5,6 +5,8 @@ const login = require('../controller/login.controller')
 const register = require('../controller/register.controller')
 const data= require('../class/data.class')
 const profile = require('../controller/profile.controller')
+const bodyParser = require('body-parser')
+router.use(bodyParser.json())
 
 let sess;
 const Auth = (req,res,next) => {
@@ -66,8 +68,10 @@ router.get('/profile',Auth,(req,res) => {
         sess
     })
 })
-router.post('/profile',profile.GetProfileImage)
-
+router.post('/profile',profile.SetProfileUser,(req,res) => {
+    res.redirect('/profile')
+})
+router.delete('/profile/:path',profile.DeleteProfile)
 
 
 

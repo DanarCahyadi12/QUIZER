@@ -7,7 +7,7 @@ const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const fileUpload = require('express-fileupload')
 //config
-const fse = require('fs-extra')
+
 
 let sess
 app.use(fileUpload({
@@ -32,6 +32,7 @@ app.use(session({
     
 
 }))
+app.use(express.json())
 app.use((req,res,next) => {
     sess = req.session
     console.log(sess)
