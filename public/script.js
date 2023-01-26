@@ -1,24 +1,22 @@
-//Count total description
-const countEl = document.querySelector('.count')
+//Count max length description
+const currentDescLengthEl = document.querySelector('.count')
 const descInput = document.querySelector('.description')
-let countNum = 0
+let currentDescLength = 0
 descInput.addEventListener('keydown',e => {
     let {code} = e
-    console.log(code)
-    if(countNum >= 255 &&  code !== 'Backspace' && code !== 'ArrowLeft'){
+    if(currentDescLength >= 255 &&  code !== 'Backspace' && code !== 'ArrowLeft'){
         e.preventDefault()
     }
 })
 descInput.addEventListener('input',e => {
     let value = e.target.value
-    countNum = value.length
-    countEl.innerHTML = countNum
+    currentDescLength = value.length
+    currentDescLengthEl.innerHTML = currentDescLength
 })
 
 
 //delete profile 
 const delProfileBtn = document.querySelector('.del-profile')
-console.log(delProfileBtn)
 const DeleteProfileImg = (endpoint) => {
     fetch(endpoint,{
         method : "DELETE"
@@ -35,4 +33,3 @@ delProfileBtn.addEventListener('click',e => {
 })
 
 //end delete profile
-

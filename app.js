@@ -6,6 +6,8 @@ const bodyParser = require('body-parser')
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const fileUpload = require('express-fileupload')
+const datas = require('./class/data.class')
+const rank = require('./controller/rank.controller')
 //config
 
 
@@ -39,6 +41,7 @@ app.use((req,res,next) => {
     next()
 })
 
+//Update Data
 //main
 app.use('/',router)
 

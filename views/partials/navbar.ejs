@@ -2,21 +2,30 @@
     <div class="flex-1">
       <a class="btn btn-ghost normal-case text-xl">QUIZER</a>
     </div>
+    <ul class="flex gap-[10px] justify-start w-full ml-[20px]">
+      <li><a href="/">Home</a></li>
+      <li><a href="/overview">Quiz Overview</a></li>
+    </ul>
     <div class="flex-none">
       <div class="dropdown dropdown-end">
       </div>
       <div class="dropdown dropdown-end">
         <label tabindex="0" class="btn btn-ghost btn-circle avatar">
           <div class="w-10 rounded-full">
-            <img src="<%= sess.user.profilePath %> " />
+            <% if (sess.user) { %>
+              <img src="<%= sess.user.profilePath %> " />
+            <% } else {%>
+              <img src="/asset/user.png" />
+            <%} %>
           </div>
         </label>
 
         <% if (!sess.user) { %>
             <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                 <li><a href="/login">Login</a></li>
-                <li><a href="/create">Create quiz</a></li>
                 <li><a href="/register">Register</a></li>
+                <li><a href="/create">Create quiz</a></li>
+                <li><a href="/profile">Profile</a></li>
               </ul>
         <% }else {%>
             <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">

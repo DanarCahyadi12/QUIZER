@@ -11,7 +11,8 @@ class Data {
     #description
     #profileImg
 
-    SetData(id,username,email,point,uploadedQuiz,rank,desc){
+    #dataRank = null
+    SetDataUser(id,username,email,point,uploadedQuiz,rank,desc){
         this.#id = id
         this.#username = username
         this.#email = email
@@ -26,21 +27,31 @@ class Data {
     SetProfileSession(path){
         this.#profileImg = path
     }
-    GetUpdateData(){
+    GetUpdateDataUser(){
         const id = this.#id
         let sql = "SELECT iduser,username,email,point,ranks,total_quiz,description FROM user WHERE iduser = ?"
         db.query(sql,[id],(err,rows) => {
             if(err) throw err
             if(rows.length > 0){
                 const {iduser,username,email,point,ranks,total_quiz,description} = rows[0]
-                this.SetData(iduser,username,email,point,total_quiz,ranks,description)
+                this.SetDataUser(iduser,username,email,point,total_quiz,ranks,description)
             } else{
                 console.log('NO DATA')
             }
         })
     }
+    SetRankUser(datas){
+        this.#rank = datas
+    }
+    SetRankData(datas){
+        this.#dataRank = datas
+    }
 
-    GetData() {
+    GetRankData(){
+        return this.#dataRank
+    }
+
+    GetDataUser() {
         return {
             id : this.#id,
             username : this.#username,
@@ -52,7 +63,6 @@ class Data {
             profilePath : this.#profileImg
         }
     }
-
 
 }
 

@@ -28,12 +28,18 @@
     
     <div class="px-6">
       <div class="flex flex-wrap justify-center">
+        <% if(!isSucces) { %>
+          <p class="massage text-center mt-[30px] text-red-500 italic"><%= massage %> </p>
+          <% }else { %>
+            <p class="massage text-center mt-[30px] text-lime-400 italic"><%= massage %> </p>
+            <% } %>
         <div class="w-full px-4 flex justify-center">
-          <div class="relative">
-            <img alt="..." src=" <%= sess.user.profilePath %>  " class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 
-            lg:-ml-16 max-w-150-px relative"> 
-            <%- include('./partials/edit.profile.ejs')  %> 
-          </div>
+            <div class="avatar relative mt-[30px]">
+              <div class="w-24 rounded-full">
+                <img src=" <%= sess.user.profilePath %>  " />
+                <%- include('./partials/edit.profile.ejs')  %> 
+              </div>
+            </div>
         </div>
         <div class="w-full px-4 text-center mt-20">
           <%- include('./partials/profile.partials.ejs')  %> 

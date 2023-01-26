@@ -4,26 +4,22 @@ const bcrypt = require('bcrypt')
 const BcryptSalt = require('bcrypt-salt');
 const bs = new BcryptSalt()
 const data = require('../class/data.class')
-const profile = require('./profile.controller')
+const rank = require('./rank.controller')
 
 class Register {
-
     #InsertDataIntoDatabase(res,next,username,email,password){
         let sql = "INSERT INTO user (username,email,password,point,ranks,total_quiz) VALUE (?,?,?,?,?,?)"
-        let querySelectData = " SELECT username FROM user"
-        db.query(querySelectData,(err,rank) => {
-            if(err) throw err
-            db.query(sql,[username,email,password,'0',rank.length +1,'0'],(err,rows,fields) => {
+            db.query(sql,[username,email,password,'0',null,'0'],(err,rows,fields) => {
                 if(err){
                     massage.SetMassage('Username , email or password maybe already takens. Please try again')
                     res.redirect('/register')
                 } else{
-                    data.SetData(rows.insertId,username,email,0,0,rank.length + 1,null)
+                    data.SetDataUser(rows.insertId,username,email,0,0, "Bronze",null)
+                    rank.SetRank()
                     data.SetProfileSession('/asset/user.png')
                     next()
                 }
             })
-        })
     }
 
     #HashingPassword(res,next,username,email,password){
@@ -49,11 +45,15 @@ class Register {
         if(!plainTextPass.match(/[0-9]/g)){
             massage.SetMassage('"Password must be filled with a number"')
             return false
-        } 
-
-     
-  
-
+        }
+        if(plainTextPass.includes(' ')){
+            massage.SetMassage('"Password must not be contains whitespace"')
+            return false
+        }
+        if(username.includes(' ')){
+            massage.SetMassage('"Username must not be contains whitespace"')
+            return false
+        }
         return true
     }
     RegisterAccount = (req,res,next) => {

@@ -6,6 +6,7 @@ const register = require('../controller/register.controller')
 const data= require('../class/data.class')
 const profile = require('../controller/profile.controller')
 const bodyParser = require('body-parser')
+const rank = require('../controller/rank.controller')
 router.use(bodyParser.json())
 
 let sess;
@@ -24,19 +25,23 @@ router.get('/',(req,res) =>{
 }) 
 
 router.get('/login',(req,res) => {
+    rank.SetRank()
     res.render('login',{
         massage : massage.GetMassage()
     })
 })
 
 router.get('/overview',(req,res) => {
+    rank.SetRank()
     sess = req.session
     res.render('quiz',{
-        sess
+        sess,
+        dataMassage :rank.GetRankMassage()
     })
 })
 
 router.get('/register',(req,res) => {
+    rank.SetRank()
     res.render('register',{
         massage : massage.GetMassage()
     })
@@ -44,13 +49,13 @@ router.get('/register',(req,res) => {
 
 router.post('/register',register.RegisterAccount,(req,res) => {
     sess = req.session
-    sess.user = data.GetData()
+    sess.user = data.GetDataUser()
     res.redirect('/overview')
 })
 
 router.post('/login',login.LoginAccount,(req,res) => {
     sess = req.session
-    sess.user = data.GetData()
+    sess.user = data.GetDataUser()
     res.redirect('/overview')
 })
 
@@ -62,16 +67,26 @@ router.get('/logout',(req,res) =>{
 })
 
 router.get('/profile',Auth,(req,res) => {
+    rank.SetRank()
     sess = req.session
-    sess.user = data.GetData()
+    sess.user = data.GetDataUser()
     res.render('profile',{
-        sess
+        sess,
+        massage: massage.GetProfileMassage(),
+        isSucces : profile.IsSucces()
     })
 })
 router.post('/profile',profile.SetProfileUser,(req,res) => {
     res.redirect('/profile')
 })
 router.delete('/profile/:path',profile.DeleteProfile)
+
+router.get('/create',Auth,(req,res) => {
+    sess = req.session
+    res.render('create',{
+        sess
+    })
+})
 
 
 
