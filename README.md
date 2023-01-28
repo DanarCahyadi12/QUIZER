@@ -4,7 +4,7 @@
     2.Logout (Finish)
     3.Register (Finish)
     4.Change profile image (Finish)
-    5.Change username (Unfinished)
+    5.Change username (Finish)
     6.Create quiz question (Unfinished)
     7.Answer quiz question (Unfinished)
 
