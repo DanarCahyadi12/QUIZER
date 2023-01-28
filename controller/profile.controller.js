@@ -59,7 +59,7 @@ class Profile {
     SetProfileImage(file){
         const user = data.GetDataUser()
         const id = user.id
-        let dir = "public/img/"+ file
+        let dir = "public/img/"+ file.name
         const ext = ['.jpg','.jpeg','.png']
             for (let index = 0; index < ext.length; index++) {
                 if(fs.existsSync( `public/img/${id}${ext[index]}`)){
@@ -106,12 +106,12 @@ class Profile {
                 if(err) throw err
             }) 
         })
-        data.SetProfileSession('/asset/user.png')
-        massage.SetMassage(null,"Profile image succesfully deleted")
-        this.#isSucces(true)
         res.json({
             redirect :'/profile'
         })        
+        data.SetProfileSession('/asset/user.png')
+        massage.SetMassage(null,"Profile image succesfully deleted")
+        this.IsSucces(true)
     }
 
     UpdateUsernameAndDescription(username,description){
