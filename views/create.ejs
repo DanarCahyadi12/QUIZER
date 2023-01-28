@@ -26,11 +26,11 @@
       <div class="wrapper ">
         <div class="flex flex-col">
           <label class="leading-loose">Subject</label>
-          <input type="text" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Subject quiz" name="quiz-subject" required>
+          <input type="text" class="subject px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Subject quiz" name="quiz-subject" required>
         </div>
         <div class="flex flex-col mt-[20px]">
           <label class="leading-loose">Description</label>
-          <input type="text" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Optional" name="quiz-description">
+          <input type="text" class="description px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Optional" name="quiz-description">
         </div>
         <div class="flex flex-col mt-[20px]">
           <label class="leading-loose">Quiz image (optional)</label>
@@ -43,61 +43,61 @@
           <div class="form-control">
               <label class="label cursor-pointer">
                 <span class="label-text ml-[35px]">5</span> 
-                <input type="radio" name="total-question" value="5" class="radio checked:bg-blue-500 "  checked />
+                <input type="radio" name="total-question" value="5" class="total-question radio checked:bg-blue-500 "  checked />
               </label>
             </div>
             <div class="form-control">
               <label class="label cursor-pointer flex gap-[10px]">
                 <span class="label-text ml-[35px]">10</span> 
-                <input type="radio" name="total-question" value="10" class="radio checked:bg-blue-500"  />
+                <input type="radio" name="total-question" value="10" class="total-question radio checked:bg-blue-500"  />
               </label>
             </div>
             <div class="form-control">
               <label class="label cursor-pointer flex gap-[10px]">
                 <span class="label-text ml-[35px]">15</span> 
-                <input type="radio" name="total-question" value="15" class="radio checked:bg-blue-500"  />
+                <input type="radio" name="total-question" value="15" class="total-question radio checked:bg-blue-500"  />
               </label>
             </div>
             <div class="form-control">
               <label class="label cursor-pointer flex gap-[10px]">
                 <span class="label-text ml-[35px]">20</span> 
-                <input type="radio" name="total-question" value="20" class="radio checked:bg-blue-500"  />
+                <input type="radio" name="total-question" value="20" class="total-question radio checked:bg-blue-500"  />
               </label>
             </div>
             <div class="form-control">
               <label class="label cursor-pointer flex gap-[10px]">
                 <span class="label-text ml-[35px]">25</span> 
-                <input type="radio" name="total-question" value="25" class="radio checked:bg-blue-500"  />
+                <input type="radio" name="total-question" value="25" class="total-question radio checked:bg-blue-500"  />
               </label>
             </div>
             <div class="form-control">
               <label class="label cursor-pointer flex gap-[10px]">
                 <span class="label-text ml-[35px]">30</span> 
-                <input type="radio" name="total-question" value="30" class="radio checked:bg-blue-500"  />
+                <input type="radio" name="total-question" value="30" class="total-question radio checked:bg-blue-500"  />
               </label>
             </div>
             <div class="form-control">
               <label class="label cursor-pointer flex gap-[10px]">
                 <span class="label-text ml-[35px]">35</span> 
-                <input type="radio" name="total-question" value="35" class="radio checked:bg-blue-500"  />
+                <input type="radio" name="total-question" value="35" class="total-question radio checked:bg-blue-500"  />
               </label>
             </div>
             <div class="form-control">
               <label class="label cursor-pointer flex gap-[10px]">
                 <span class="label-text ml-[35px]">40</span> 
-                <input type="radio" name="total-question" value="40" class="radio checked:bg-blue-500"  />
+                <input type="radio" name="total-question" value="40" class="total-question radio checked:bg-blue-500"  />
               </label>
             </div>
             <div class="form-control">
               <label class="label cursor-pointer flex gap-[10px]">
                 <span class="label-text ml-[35px]">45</span> 
-                <input type="radio" name="total-question" value="45" class="radio checked:bg-blue-500"  />
+                <input type="radio" name="total-question" value="45" class="total-question radio checked:bg-blue-500"  />
               </label>
             </div>
             <div class="form-control">
               <label class="label cursor-pointer flex gap-[10px]">
                 <span class="label-text ml-[35px]">50</span> 
-                <input type="radio" name="total-question" value="50" class="radio checked:bg-blue-500"  />
+                <input type="radio" name="total-question" value="50" class="total-question radio checked:bg-blue-500"  />
               </label>
             </div>
       </div>
@@ -105,54 +105,7 @@
   </div>
 </div>
   <!----Question-->
-
-  <div class="mt-[30px] py-6  w-full rounded-md p-[20px] shadow-lg bg-white sm:py-12">
-    <div class="title">
-      <h2 class="text-lg">Question</h2>
-    </div>
-
-    <div class="question-container mt-[30px]">
-      <div class="question flex align-center gap-[10px]">
-        <h3 class="number mt-[4px]">1.</h3>
-        <input type="text" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Write question" name="question" required>
-      </div>
-
-      <div class="answer-container mt-[70px]">
-        <div class="wrapper flex gap-[10px] align-center">
-          <div class="answer flex flex-col gap-[10px]">
-            <div class="answer-wrapper">
-              <label for="answer-a">a.</label>
-              <input type="text" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-[120px] sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Write answer" name="question" required>
-            </div>
-            <div class="answer-wrapper">
-              <label for="answer-a">b.</label>
-              <input type="text" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-[120px] sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Write answer" name="question" required>
-            </div>
-            <div class="answer-wrapper">
-              <label for="answer-a">c.</label>
-              <input type="text" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-[120px] sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Write answer" name="question" required>
-            </div>
-          </div>
-
-          <div class="detail-wrapper flex  gap-[30px]">
-            <div class="wrapper flex flex-col gap-[10px]">
-              <label for="detail-answer" class="detail-btn btn btn-xs mt-[5px]">Detail</label>
-                <label for="detail-answer" class="detail-btn btn btn-xs mt-[15px]">Detail</label>
-                <label for="detail-answer" class="detail-btn btn btn-xs mt-[15px]">Detail</label> 
-            </div>
-            <div class="wrapper-set-true flex flex-col ml-[30px]">
-              <div class="title mt-[-40px]">
-                <h2>Choose true answer</h2>
-              </div>
-              <input type="radio" name="radio-4" class="radio radio-accent mt-[22px]" />
-              <input type="radio" name="radio-4" class="radio radio-accent mt-[23px]" />
-              <input type="radio" name="radio-4" class="radio radio-accent mt-[24px]" />
-            </div>
-          </div>
-        </div>
-        
-      </div>
-    </div>
+  <div class="container-questions p-[20px] rounded-xl mt-[50px] ">
   </div>
 </form>
 
@@ -172,5 +125,6 @@
   
   </div>
 </div> -->
+<script src="/create.js"></script>
 </body>
 </html>
