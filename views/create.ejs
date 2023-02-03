@@ -20,21 +20,17 @@
   UI Design Prototype
   Link : https://dribbble.com/shots/10452538-React-UI-Components
 -->
-<form action="POST" enctype="application/x-www-form-urlencoded" class=" mt-[40px]">
+<form method="POST" enctype="application/x-www-form-urlencoded" class=" mt-[40px]">
   <div class="mt-[-29px] py-6  w-full rounded-md p-[20px] shadow-lg bg-white justify-center sm:py-12">
     <div class="container grid grid-cols-2 mt-[4px] gap-[30px]">
       <div class="wrapper ">
         <div class="flex flex-col">
           <label class="leading-loose">Subject</label>
-          <input type="text" class="subject px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Subject quiz" name="quiz-subject" required>
+          <input type="text" class="subject bg-white px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Subject quiz" name="quiz-subject" required>
         </div>
         <div class="flex flex-col mt-[20px]">
           <label class="leading-loose">Description</label>
-          <input type="text" class="description px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Optional" name="quiz-description">
-        </div>
-        <div class="flex flex-col mt-[20px]">
-          <label class="leading-loose">Quiz image (optional)</label>
-          <input type="file" class="file-input file-input-bordered file-input-xs w-full max-w-xs" name="quiz-image" />
+          <input type="text" class="description bg-white px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Optional" name="quiz-description">
         </div>
       </div>
       <div class="num-question">
@@ -109,7 +105,7 @@
   </div>
   <!----End question-->
     <div class="form-actions flex justify-end gap-[20px] mr-[20px] mb-[30px]">
-      <button type="submit" class="btn btn-primary btn-active">Create</button>
+      <label class="create-btn btn btn-primary btn-active">Create</label>
       <a class="btn btn-ghost" href="/overview">Back</a>
     </div>
 </form>

@@ -1,4 +1,4 @@
-const mysql = require('mysql')
+const mysql = require('mysql2')
 require('dotenv').config({path : '.env'})
 const db = mysql.createConnection({
     host : process.env.DB_HOSTNAME ,

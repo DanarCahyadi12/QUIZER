@@ -7,6 +7,7 @@ const data= require('../class/data.class')
 const profile = require('../controller/profile.controller')
 const bodyParser = require('body-parser')
 const rank = require('../controller/rank.controller')
+const create = require('../controller/create.controller')
 router.use(bodyParser.json())
 
 let sess;
@@ -89,7 +90,7 @@ router.get('/create',(req,res) => {
 })
 
 
-
+router.post('/create',create.CreateQuiz)
 
 
 module.exports = router
