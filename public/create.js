@@ -7,11 +7,16 @@ const okDetailBtn = document.querySelector('.ok-detail-btn')
 const trueAnswerRadio = document.querySelectorAll('.true-answer')
 const questionContainer = document.querySelector('.container-questions')
 const createBtn = document.querySelector('.create-btn')
+
 let answerField;
 let html = ``
 let index = 0
 let totalQuestion = 5
+let massage
 
+const SendMassage= () => {
+  let htmlMassage=``
+}
 
 totalQuestionRadio.forEach((radio,i) => {
   radio.addEventListener('click',e => {
@@ -37,7 +42,7 @@ const SubmitQuiz = (data) => {
       'Content-Type': 'application/json; charset=UTF-8'
     }
   })
-  .then(res => res.json()).then(data => window.location.href = data.redirect)
+  .then(res => res.json()).then(data => console.log(data))
 
 }
 
@@ -132,7 +137,7 @@ const SetTotalQuestion = (num) => {
                 </div>
                 <input type="radio" name="radio_${i}" class="bg-white true-answer radio radio-accent mt-[22px]" value="" required/>
                 <input type="radio" name="radio_${i}" class="bg-white true-answer radio radio-accent mt-[23px]" value="" required/>
-                <input type="radio" name="radio_${i}" class="bg-white true-answer radio radio-accent mt-[24px]" value="" requireds/>
+                <input type="radio" name="radio_${i}" class="bg-white true-answer radio radio-accent mt-[24px]" value="" required/>
               </div>
             </div>
           </div>
@@ -150,7 +155,39 @@ const SetTotalQuestion = (num) => {
 
     //Submitting data 
     createBtn.addEventListener('click',() => {
-      SetBodyQuiz(questionField,answerField,trueAnswerEl)
+      let isOk = true
+      if(subjectField.value.length === 0){
+        isOk = false
+        massage = "Subject is required"
+      } 
+
+      for(let i=0; i < questionField.length; i++){
+        if(questionField[i].value.length === 0) {
+          massage = "All question is required"
+          isOk = false
+          break
+        }
+      }
+      for(let i=0; i < answerField.length; i++){
+        if(answerField[i].value.length === 0) {
+          isOk = false
+          massage = "All answer is required"
+          break
+        }
+      }
+
+      for(let i=0; i < trueAnswerEl.length; i++){
+        if(trueAnswerEl[i].checked) {
+          isOk = true
+          massage = "Cannot submit question. Please choose a true answer"
+          break
+        }else{
+          isOK = false
+        }
+      }
+      
+      if(isOk) SetBodyQuiz(questionField,answerField,trueAnswerEl)
+      if(!isOk) SendMassage()
   
   
     })
@@ -225,9 +262,33 @@ const SetDefaultTotalQuestion = () => {
 
     //Submitting data 
     createBtn.addEventListener('click',() => {
-      SetBodyQuiz(questionField,answerField,trueAnswerEl)
-  
-  
+      let isOk = true
+      if(subjectField.value.length === 0) isOk = false
+
+      for(let i=0; i < questionField.length; i++){
+        if(questionField[i].value.length === 0) {
+          isOk = false
+          break
+        }
+      }
+      for(let i=0; i < answerField.length; i++){
+        if(answerField[i].value.length === 0) {
+          isOk = false
+          break
+        }
+      }
+
+      for(let i=0; i < trueAnswerEl.length; i++){
+        if(trueAnswerEl[i].checked) {
+          isOk = true
+          console.log(trueAnswerEl[i].checked)
+          break
+        }else{
+          isOK = false
+        }
+      }
+      
+      if(isOk) SetBodyQuiz(questionField,answerField,trueAnswerEl)
     })
     SetTrueAnswerValue(trueAnswerEl,answerField)
     detailBtn.forEach((btn,i) => {
