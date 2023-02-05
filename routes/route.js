@@ -82,7 +82,7 @@ router.post('/profile',profile.SetProfileUser,(req,res) => {
 })
 router.delete('/profile/:path',profile.DeleteProfile)
 
-router.get('/create',Auth,(req,res) => {
+router.get('/create',(req,res) => {
     sess = req.session
     res.render('create',{
         sess
@@ -90,13 +90,7 @@ router.get('/create',Auth,(req,res) => {
 })
 
 
-router.post('/create',create.CreateQuiz,(req,res) => {
-    res.json({
-        isOk : true,
-        massage : "Quiz succesfully created",
-        redirect : "/create"
-    })
-})
+router.post('/create',create.CreateQuiz)
 
 
 module.exports = router

@@ -22,7 +22,7 @@
 -->
 <form  method="POST" enctype="application/x-www-form-urlencoded" class=" mt-[40px] pb-[20px] ">
   <div class="mt-[-29px] py-6 w-full rounded-md p-[20px] shadow-lg bg-white justify-center sm:py-12">
-    <div class="container grid grid-cols-2 mt-[4px] gap-[30px]">
+    <div class="container grid grid-cols-3 mt-[4px] gap-[30px]">
       <div class="wrapper ">
         <div class="flex flex-col">
           <label class="leading-loose">Subject</label>
@@ -31,6 +31,21 @@
         <div class="flex flex-col mt-[20px]">
           <label class="leading-loose">Description</label>
           <input type="text" class="description bg-white px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Optional" name="quiz-description">
+        </div>
+      </div>
+      <div class="time-limit">
+        <h2 class="title ml-[30px] mb-[29px] mt-[5px] text-xl">Time limit</h2>
+        <div class="form-control w-full max-w-xs bg-white">
+          <label class="label grid grid-cols-3 ml-[30px]">
+            <span class="label-text">Hour</span>
+            <span class="label-text">Minute</span>
+            <span class="label-text">Second</span>
+          </label>
+          <div class="input grid grid-cols-3 bg-white">
+            <input type="number" placeholder="Hour" class="input input-bordered bg-white w-[90px] max-w-xs" min="0" max="59"/>
+            <input type="number" placeholder="Minute" class="input input-bordered bg-white w-[90px] max-w-xs" min="0" max="59"/>
+            <input type="number" placeholder="Second" class="input input-bordered bg-white w-[90px] max-w-xs" min="0" max="59"/>
+          </div>
         </div>
       </div>
       <div class="num-question">
@@ -105,6 +120,9 @@
   </div>
   <!----End question-->
     <div class="form-actions flex justify-end gap-[20px] mr-[20px] mb-[30px]">
+      <div class="form-massage m-auto mr-[170px]">
+        <p class="error-massage text-right italic text-red-700"></p>
+      </div>
       <label   class="create-btn btn btn-primary btn-active">Create</label>
       <a class="btn btn-ghost" href="/overview">Back</a>
     </div>
